@@ -1,3 +1,4 @@
+"""Servidor Flask que expone el detector de emociones."""
 from flask import Flask, render_template, request
 from EmotionDetection.emotion_detection import emotion_detector
 
@@ -5,6 +6,7 @@ app = Flask("Emotion Detector")
 
 @app.route("/emotionDetector")
 def emotion_route():
+    """Devuelve el análisis de emociones del texto recibido."""
     text = request.args.get('textToAnalyze')
     #print(text)
     result = emotion_detector(text)
@@ -24,7 +26,8 @@ def emotion_route():
 
 @app.route("/")
 def render_index_page():
+    """Muestra la página principal de la aplicación."""
     return render_template('index.html')
-        
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
