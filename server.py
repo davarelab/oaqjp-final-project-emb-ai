@@ -6,8 +6,11 @@ app = Flask("Emotion Detector")
 @app.route("/emotionDetector")
 def emotion_route():
     text = request.args.get('textToAnalyze')
-    print(text)
+    #print(text)
     result = emotion_detector(text)
+
+    if result['dominant_emotion'] is None:
+        return "Invalid text! Please try again!"
 
     return (
         f"For the given statement, the system response is "
